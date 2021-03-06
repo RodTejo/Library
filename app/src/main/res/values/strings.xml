@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Library</string>
-    <string name="not_found">Not Found</string>
+    <string name="not_found">No encontrado</string>
+
+    <string name="title_label">Titulo:</string>
+    <string name="author_label">Autor:</string>
+    <string name="category_label">Categoría:</string>
+
+    <string name="ok">Ok</string>
+
+    <string name="network_error_message">Error al descargar libros de internet</string>
+    <string name="storage_error_message">Error al consultar libros de base de datos local</string>
 </resources>

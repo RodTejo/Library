@@ -12,6 +12,6 @@ class BookListRemoteRepo @Inject constructor(
 ){
     fun downLoadBooks(): Single<List<BookModel>> {
         return bookListApi.downloadBooks()
-            .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
     }
 }

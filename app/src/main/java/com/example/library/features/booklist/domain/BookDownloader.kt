@@ -14,10 +14,10 @@ class BookDownloader @Inject constructor(
     fun downloadBooks() : Completable {
         return bookListRemoteRepo.downLoadBooks()
             .flatMapCompletable {
-                if (it.isEmpty())
-                    Completable.error(Throwable())
-                else
+                if (it.isNotEmpty())
                     bookListLocalRepo.insertBooks(generateBookEntityList(it))
+                else
+                    Completable.complete()
             }
     }
 

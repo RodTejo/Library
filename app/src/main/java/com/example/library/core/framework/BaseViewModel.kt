@@ -20,5 +20,5 @@ open class BaseViewModel : ViewModel(){
 
     protected fun handleError(throwable: Throwable) = failureLiveData.postValue(throwable)
 
-    protected fun getFailureLiveData() : LiveData<Throwable> = failureLiveData
+    fun getFailureLiveData() : LiveData<Throwable> = failureLiveData
 }
