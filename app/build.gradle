@@ -80,4 +80,7 @@ dependencies {
 
     /* Add Kotlin support */
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+
+    /* Cardview ui */
+    implementation "androidx.cardview:cardview:1.0.0"
 }
