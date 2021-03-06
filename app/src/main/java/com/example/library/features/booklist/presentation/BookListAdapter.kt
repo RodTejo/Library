@@ -1,18 +1,19 @@
 package com.example.library.features.booklist.presentation
 
 import android.content.Context
-import android.icu.number.NumberFormatter.with
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library.R
+import com.example.library.core.utils.GenericUtility
 import com.example.library.databinding.LayoutBookCardBinding
 import com.example.library.features.booklist.data.entity.BookEntity
 import com.squareup.picasso.Picasso
 
 class BookListAdapter(
     private val books: List<BookEntity>,
-    private val listener: BookListAdapterListener<String>
+    private val listener: BookListAdapterListener<String>,
+    private val genericUtility: GenericUtility
 ) :
     RecyclerView.Adapter<BookListAdapter.BookListViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookListViewHolder {
@@ -23,7 +24,8 @@ class BookListAdapter(
                 false
             ),
             listener,
-            parent.context
+            parent.context,
+            genericUtility
         )
     }
 
@@ -38,7 +40,8 @@ class BookListAdapter(
     class BookListViewHolder(
         private val binding: LayoutBookCardBinding,
         private val listener: BookListAdapterListener<String>,
-        private val context: Context
+        private val context: Context,
+        private val genericUtility: GenericUtility
     ) : RecyclerView.ViewHolder(binding.root){
         fun bind(book: BookEntity) {
             Picasso.get().load(book.imageUrl)
@@ -46,9 +49,14 @@ class BookListAdapter(
                 .error(R.drawable.placeholder_missing_image)
                 .into(binding.bookImage)
             val notFoundString: String = context.getString(R.string.not_found)
-            binding.bookTitle.text = book.title ?: notFoundString
-            binding.bookAuthor.text = book.authorFirstName ?: notFoundString + " " +book.authorLastName ?: notFoundString
-            binding.bookCategory.text = book.category ?: notFoundString
+            binding.bookTitle.text =
+                context.getString(R.string.title_label, book.title ?: notFoundString)
+            binding.bookAuthor.text = context.getString(R.string.author_label, genericUtility.generateAuthorFullName(
+                book.authorFirstName ?: notFoundString,
+                book.authorLastName ?: notFoundString
+            ))
+            binding.bookCategory.text =
+                context.getString(R.string.category_label, book.category ?: notFoundString)
             binding.root.setOnClickListener { listener.onClick(book.id)}
         }
     }

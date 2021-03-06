@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
-    android:layout_marginBottom="10dp">
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,61 +29,30 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/book_title_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_label"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"
-                style="@style/BookCardText"/>
-
-            <TextView
                 android:id="@+id/book_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="15dp"
                 card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/book_title_label"
-                tools:text="Titulo val"
-                style="@style/BookCardText"/>
-
-            <TextView
-                android:id="@+id/book_autor_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/author_label"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
+                tools:text="Titulo val"
                 style="@style/BookCardText"/>
 
             <TextView
                 android:id="@+id/book_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="15dp"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/book_autor_label"
-                tools:text="Autor val"
-                style="@style/BookCardText"/>
-
-            <TextView
-                android:id="@+id/book_autor_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/category_label"
-                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
+                tools:text="Autor val"
                 style="@style/BookCardText"/>
 
             <TextView
                 android:id="@+id/book_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="15dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/book_autor_category"
+                card_view:layout_constraintStart_toStartOf="parent"
                 tools:text="Categoría"
                 style="@style/BookCardText"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

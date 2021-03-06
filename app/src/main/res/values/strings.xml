@@ -2,12 +2,19 @@
     <string name="app_name">Library</string>
     <string name="not_found">No encontrado</string>
 
-    <string name="title_label">Titulo:</string>
-    <string name="author_label">Autor:</string>
-    <string name="category_label">Categoría:</string>
+    <string name="title_label">Titulo: %1$s</string>
+    <string name="author_label">Autor: %1$s</string>
+    <string name="category_label">Categoría: %1$s</string>
+    <string name="date_label">Fecha de publicación: %1$s</string>
+    <string name="page_number_label">Número de páginas: %1$s</string>
+    <string name="isbn_label">Isbn: %1$s</string>
+    <string name="description_label">Descripción:</string>
 
     <string name="ok">Ok</string>
 
     <string name="network_error_message">Error al descargar libros de internet</string>
     <string name="storage_error_message">Error al consultar libros de base de datos local</string>
+
+    <string name="unknown_error">Error desconocido</string>
+    <string name="unknown_network_error">Error de red desconocido</string>
 </resources>
