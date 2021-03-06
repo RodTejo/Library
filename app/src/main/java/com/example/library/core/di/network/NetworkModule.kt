@@ -20,7 +20,7 @@ import javax.inject.Singleton
 class NetworkModule {
     companion object{
         const val CACHE_SIZE: Long = 10 * 1024 * 1024;
-        const val CONNECTION_TIMEOUT_IN_SECONDS: Long = 60
+        const val CONNECTION_TIMEOUT_IN_SECONDS: Long = 10
     }
 
     @Provides

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.bookdetail.presentation.BookDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Titulo: titulo"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Autor: autor"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Categoría: categoría"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Fecha de publicación: fecha"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:id="@+id/pages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Número de paginas: 123"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:id="@+id/isbn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Categoría: categoría"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description_label"
+            style="@style/BookDetailText"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Esto es una descripción"
+            android:textStyle="normal"
+            android:paddingStart="10dp"
+            style="@style/BookDetailText"/>
+    </LinearLayout>
+</ScrollView>

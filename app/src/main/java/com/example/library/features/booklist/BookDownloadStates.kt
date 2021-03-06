@@ -2,6 +2,5 @@ package com.example.library.features.booklist
 
 enum class BookDownloadStates {
     DOWNLOAD_INIT,
-    DOWNLOAD_SUCCESS,
-    DOWNLOAD_ERROR
+    DOWNLOAD_SUCCESS
 }
