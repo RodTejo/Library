@@ -20,5 +20,7 @@ data class BookModel (
     @SerializedName("author")
     val author: AuthorModel,
     @SerializedName("_createdOn")
-    val creationDate: String
+    val creationDate: String,
+    @SerializedName("published")
+    val publisher: String
 )
