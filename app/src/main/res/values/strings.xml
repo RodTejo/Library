@@ -6,6 +6,7 @@
     <string name="author_label">Autor: %1$s</string>
     <string name="category_label">Categoría: %1$s</string>
     <string name="date_label">Fecha de publicación: %1$s</string>
+    <string name="publisher_label">Editorial: %1$s</string>
     <string name="page_number_label">Número de páginas: %1$s</string>
     <string name="isbn_label">Isbn: %1$s</string>
     <string name="description_label">Descripción:</string>

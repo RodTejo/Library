@@ -57,6 +57,7 @@ class BookDetailActivity : BaseActivity() {
         ))
         binding.category.text = getString(R.string.category_label, bookEntity.category ?: notFoundString)
         binding.date.text = getString(R.string.date_label, bookEntity.creationDate?.toDate()?.formatTo(BOOK_DETAIL_DATE_FORMAT))
+        binding.publisher.text = getString(R.string.publisher_label, bookEntity.publisher ?: notFoundString)
         binding.pages.text = getString(R.string.page_number_label, bookEntity.pages.toString())
         binding.isbn.text = getString(R.string.isbn_label, bookEntity.isbn ?: notFoundString)
         binding.description.text = bookEntity.description ?: notFoundString

@@ -121,6 +121,7 @@ class BookListAdapter(
                     book.authorFirstName,
                     book.authorLastName,
                     formattedDate,
+                    book.publisher,
                     book.pages)
             return tempBook.toString().contains(filterPattern, true)
         }

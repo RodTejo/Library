@@ -34,6 +34,7 @@ class BookDownloader @Inject constructor(
                 book.author.authorName,
                 book.author.authorLastName,
                 book.creationDate,
+                book.publisher,
                 book.pages
             )
             bookEntityList.add(bookEntity)
