@@ -2,6 +2,8 @@ package com.example.library.features.booklist.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,8 @@ import io.reactivex.exceptions.CompositeException
 import javax.inject.Inject
 
 class BookListActivity : BaseActivity(),
-        BookListAdapter.BookListAdapterListener<String> {
+        BookListAdapter.BookListAdapterListener<String>,
+        TextWatcher{
 
     @Inject
     lateinit var genericUtility: GenericUtility
@@ -41,6 +44,7 @@ class BookListActivity : BaseActivity(),
         binding.bookListRecyclerview.setHasFixedSize(true)
         binding.bookListRecyclerview.layoutManager = linearLayoutManager
         binding.bookListRecyclerview.adapter = adapter
+        binding.searchEditText.addTextChangedListener(this)
     }
 
     private fun initVM() {
@@ -72,9 +76,7 @@ class BookListActivity : BaseActivity(),
     }
 
     private fun updateBookList(bookList: List<BookEntity>) {
-        this.bookList.clear()
-        this.bookList.addAll(bookList)
-        adapter.notifyDataSetChanged()
+        adapter.updateData(bookList)
     }
 
     private fun handleDownloadStates(bookDownloadStates: BookDownloadStates) {
@@ -89,8 +91,16 @@ class BookListActivity : BaseActivity(),
     }
 
     private fun launchBookDetailActivity(bookId: String) {
-        val intent: Intent = Intent(this, BookDetailActivity::class.java)
+        val intent = Intent(this, BookDetailActivity::class.java)
         intent.putExtra(BUNDLE_KEY_BOOK_ID, bookId)
         startActivity(intent)
+    }
+
+    override fun afterTextChanged(s: Editable?) {}
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        adapter.filter.filter(s.toString())
     }
 }

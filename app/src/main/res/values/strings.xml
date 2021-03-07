@@ -17,4 +17,6 @@
 
     <string name="unknown_error">Error desconocido</string>
     <string name="unknown_network_error">Error de red desconocido</string>
+
+    <string name="search_hint">Buscar libro</string>
 </resources>

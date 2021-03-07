@@ -3,16 +3,15 @@ package com.example.library.features.bookdetail.presentation
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.library.R
-import com.example.library.core.common.AppConstants
 import com.example.library.core.common.AppConstants.BookDetail.BUNDLE_KEY_BOOK_ID
 import com.example.library.core.common.AppConstants.BookDetail.DateFormat.BOOK_DETAIL_DATE_FORMAT
 import com.example.library.core.framework.BaseActivity
 import com.example.library.core.utils.GenericUtility
+import com.example.library.core.utils.formatTo
+import com.example.library.core.utils.toDate
 import com.example.library.databinding.ActivityBookDetailBinding
 import com.example.library.features.booklist.data.entity.BookEntity
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class BookDetailActivity : BaseActivity() {
@@ -66,28 +65,4 @@ class BookDetailActivity : BaseActivity() {
     private fun handleError(throwable: Throwable?) {
         genericUtility.showErrorMessage(throwable?.message, this)
     }
-
-    /**
-     * Extension function used to transform default utc date obtained from server
-     * to a Date object which will be formatted to our desired date format on
-     * Date.formatTo extension function
-      */
-    private fun String.toDate(dateFormat: String = AppConstants.BookDetail.DateFormat.UTC_FORMAT,
-                      timeZone: TimeZone = TimeZone.getTimeZone(AppConstants.BookDetail.DateFormat.UTC_TIMEZONE)): Date? {
-        val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
-        parser.timeZone = timeZone
-        return parser.parse(this)
-    }
-
-    /**
-     * Extension function that generates a date string in our given date format from a
-     * Date object
-     */
-    private fun Date.formatTo(dateFormat: String, timeZone: TimeZone = TimeZone.getDefault()): String {
-        val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
-        formatter.timeZone = timeZone
-        return formatter.format(this)
-    }
-
-
 }
