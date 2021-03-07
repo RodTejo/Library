@@ -12,6 +12,7 @@ import com.example.library.core.common.AppConstants.BookDetail.BUNDLE_KEY_BOOK_I
 import com.example.library.core.framework.BaseActivity
 import com.example.library.core.utils.GenericUtility
 import com.example.library.databinding.ActivityBookListBinding
+import com.example.library.features.addbook.presentation.AddBookActivity
 import com.example.library.features.bookdetail.presentation.BookDetailActivity
 import com.example.library.features.booklist.BookDownloadStates
 import com.example.library.features.booklist.data.entity.BookEntity
@@ -20,6 +21,7 @@ import javax.inject.Inject
 
 class BookListActivity : BaseActivity(),
         BookListAdapter.BookListAdapterListener<String>,
+        View.OnClickListener,
         TextWatcher{
 
     @Inject
@@ -45,6 +47,7 @@ class BookListActivity : BaseActivity(),
         binding.bookListRecyclerview.layoutManager = linearLayoutManager
         binding.bookListRecyclerview.adapter = adapter
         binding.searchEditText.addTextChangedListener(this)
+        binding.addBookFab.setOnClickListener(this)
     }
 
     private fun initVM() {
@@ -75,9 +78,7 @@ class BookListActivity : BaseActivity(),
         binding.bookListProgressBar.visibility = View.GONE
     }
 
-    private fun updateBookList(bookList: List<BookEntity>) {
-        adapter.updateData(bookList)
-    }
+    private fun updateBookList(bookList: List<BookEntity>) = adapter.updateData(bookList)
 
     private fun handleDownloadStates(bookDownloadStates: BookDownloadStates) {
         when(bookDownloadStates) {
@@ -86,9 +87,7 @@ class BookListActivity : BaseActivity(),
         }
     }
 
-    override fun onClick(arg: String) {
-        launchBookDetailActivity(arg)
-    }
+    override fun onBookCardClick(arg: String) = launchBookDetailActivity(arg)
 
     private fun launchBookDetailActivity(bookId: String) {
         val intent = Intent(this, BookDetailActivity::class.java)
@@ -100,7 +99,12 @@ class BookListActivity : BaseActivity(),
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        adapter.filter.filter(s.toString())
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
+            = adapter.filter.filter(s.toString())
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+           binding.addBookFab.id -> startActivity(Intent(this, AddBookActivity::class.java))
+        }
     }
 }

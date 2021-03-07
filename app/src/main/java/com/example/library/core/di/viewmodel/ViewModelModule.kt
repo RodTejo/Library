@@ -2,6 +2,7 @@ package com.example.library.core.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.library.features.addbook.presentation.AddBookVM
 import com.example.library.features.bookdetail.presentation.BookDetailVM
 import com.example.library.features.booklist.presentation.BookListVM
 import dagger.Binds
@@ -22,4 +23,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BookDetailVM::class)
     protected abstract fun bookDetailVM(bookDetailVM: BookDetailVM): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddBookVM::class)
+    protected abstract fun addBookVM(addBookVM: AddBookVM): ViewModel
 }
