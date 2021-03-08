@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.library.core.common.AppConstants.API.BookList.API_BASE
 import com.example.library.features.addbook.data.AddBookApi
 import com.example.library.features.booklist.data.BookListApi
+import com.example.library.features.deletebook.data.DeleteBookApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -67,5 +68,11 @@ class NetworkModule {
     @Singleton
     internal fun provideAddBookApi(retrofit: Retrofit): AddBookApi {
         return retrofit.create(AddBookApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideDeleteBookApi(retrofit: Retrofit): DeleteBookApi {
+        return retrofit.create(DeleteBookApi::class.java)
     }
 }

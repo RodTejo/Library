@@ -11,16 +11,21 @@ import com.example.library.features.booklist.BookListStorageException
 import com.example.library.features.booklist.data.BookListLocalRepo
 import com.example.library.features.booklist.data.entity.BookEntity
 import com.example.library.features.booklist.domain.BookDownloader
+import com.example.library.features.deletebook.DeleteBookNetworkException
+import com.example.library.features.deletebook.domain.BookDeleter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class BookListVM @Inject constructor(
     private val bookListLocalRepo: BookListLocalRepo,
     private val bookDownloader: BookDownloader,
+    private val bookDeleter: BookDeleter,
     private val application: Application
 ): BaseViewModel() {
     private val booksListLiveData = MutableLiveData<List<BookEntity>>()
     private val booksDownloadStateLiveData = MutableLiveData<BookDownloadStates>()
+
+    var bookId = String()
 
     fun initObservers() {
         addDisposable(
@@ -36,6 +41,20 @@ class BookListVM @Inject constructor(
             bookDownloader.downloadBooks()
                 .doOnSubscribe { booksDownloadStateLiveData.postValue(BookDownloadStates.DOWNLOAD_INIT) }
                 .doOnError { throw BookListNetworkException(application.getString(R.string.network_error_message)) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({booksDownloadStateLiveData.postValue(BookDownloadStates.DOWNLOAD_SUCCESS)},
+                    this::handleError)
+        )
+    }
+
+    fun deleteBook() {
+        if (bookId.isEmpty())
+            return
+
+        addDisposable(
+            bookDeleter.deleteBook(bookId)
+                .doOnSubscribe { booksDownloadStateLiveData.postValue(BookDownloadStates.DOWNLOAD_INIT) }
+                .doOnError { throw DeleteBookNetworkException(application.getString(R.string.delete_book_network_error)) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({booksDownloadStateLiveData.postValue(BookDownloadStates.DOWNLOAD_SUCCESS)},
                     this::handleError)

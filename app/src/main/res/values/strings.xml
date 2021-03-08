@@ -37,4 +37,11 @@
 
     <string name="book_addition_success">El libro fue agregado con exito</string>
     <string name="wrong_isbn">ISBN obligatorio y no puede ser de menos de 10 caracteres</string>
+
+    <!-- Delete book -->
+    <string name="delete_book_message">¿Seguro que quieres borrar este libro?</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="delete_book_network_error">Sucedió un error al intentar borrar el libro en el servidor</string>
+    <string name="delete_book_storage_error">Sucedio un error al intentar borrar el libro de la base datos local</string>
 </resources>
