@@ -4,23 +4,26 @@ import com.google.gson.annotations.SerializedName
 
 data class BookModel (
     @SerializedName("_id")
-    val _id: String,
+    var _id: String,
     @SerializedName("isbn")
-    val isbn: String,
+    var isbn: String,
     @SerializedName("title")
-    val title: String,
+    var title: String,
     @SerializedName("category")
-    val category: String,
+    var category: String,
     @SerializedName("pages")
-    val pages: Long,
+    var pages: Long,
     @SerializedName("description")
-    val description: String,
+    var description: String,
     @SerializedName("image_url")
-    val imageUrl: String,
+    var imageUrl: String,
     @SerializedName("author")
-    val author: AuthorModel,
+    var author: AuthorModel,
     @SerializedName("_createdOn")
-    val creationDate: String,
+    var creationDate: String,
     @SerializedName("published")
-    val publisher: String
-)
+    var publisher: String
+) {
+    constructor() : this("","", "", "", -1, "",
+    "" , AuthorModel(), "", "")
+}

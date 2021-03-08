@@ -6,19 +6,13 @@ import com.example.library.R
 import com.example.library.core.common.AppConstants.BookDetail.BUNDLE_KEY_BOOK_ID
 import com.example.library.core.common.AppConstants.BookDetail.DateFormat.BOOK_DETAIL_DATE_FORMAT
 import com.example.library.core.framework.BaseActivity
-import com.example.library.core.utils.GenericUtility
 import com.example.library.core.utils.formatTo
 import com.example.library.core.utils.toDate
 import com.example.library.databinding.ActivityBookDetailBinding
 import com.example.library.features.booklist.data.entity.BookEntity
 import com.squareup.picasso.Picasso
-import javax.inject.Inject
 
 class BookDetailActivity : BaseActivity() {
-
-    @Inject
-    lateinit var genericUtility: GenericUtility
-
     private lateinit var binding: ActivityBookDetailBinding
     private lateinit var bookDetailVM: BookDetailVM
 
@@ -46,10 +40,15 @@ class BookDetailActivity : BaseActivity() {
     private fun showBookDetail(bookEntity: BookEntity) {
         val notFoundString: String = getString(R.string.not_found)
         supportActionBar?.title = bookEntity.title ?: notFoundString
-        Picasso.get().load(bookEntity.imageUrl)
-            .placeholder(R.drawable.placeholder_missing_image)
-            .error(R.drawable.placeholder_missing_image)
-            .into(binding.image)
+        if(bookEntity.imageUrl!!.isNotEmpty()) {
+            Picasso.get().load(bookEntity.imageUrl)
+                .placeholder(R.drawable.placeholder_missing_image)
+                .error(R.drawable.placeholder_missing_image)
+                .into(binding.image)
+        } else {
+            binding.image.setImageResource(R.drawable.placeholder_missing_image)
+        }
+
         binding.title.text = getString(R.string.title_label, bookEntity.title ?: notFoundString)
         binding.author.text = getString(R.string.author_label, genericUtility.generateAuthorFullName(
             bookEntity.authorFirstName ?: notFoundString,
@@ -61,9 +60,5 @@ class BookDetailActivity : BaseActivity() {
         binding.pages.text = getString(R.string.page_number_label, bookEntity.pages.toString())
         binding.isbn.text = getString(R.string.isbn_label, bookEntity.isbn ?: notFoundString)
         binding.description.text = bookEntity.description ?: notFoundString
-    }
-
-    private fun handleError(throwable: Throwable?) {
-        genericUtility.showErrorMessage(throwable?.message, this)
     }
 }

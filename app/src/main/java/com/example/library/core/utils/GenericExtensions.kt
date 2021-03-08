@@ -1,6 +1,8 @@
 package com.example.library.core.utils
 
 import com.example.library.core.common.AppConstants
+import com.example.library.features.booklist.data.entity.BookEntity
+import com.example.library.features.booklist.data.model.BookModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,4 +26,19 @@ fun Date.formatTo(dateFormat: String, timeZone: TimeZone = TimeZone.getDefault()
     val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
     formatter.timeZone = timeZone
     return formatter.format(this)
+}
+
+fun BookModel.toEntity(): BookEntity {
+    return BookEntity(
+        this._id,
+        this.isbn,
+        this.title,
+        this.category,
+        this.description,
+        this.imageUrl,
+        this.author.authorName,
+        this.author.authorLastName,
+        this.creationDate,
+        this.publisher,
+        this.pages)
 }

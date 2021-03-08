@@ -15,6 +15,7 @@
 
     <string name="network_error_message">Error al descargar libros de internet</string>
     <string name="storage_error_message">Error al consultar libros de base de datos local</string>
+    <string name="add_book_network_error">Error al enviar nuevo libro</string>
 
     <string name="unknown_error">Error desconocido</string>
     <string name="unknown_network_error">Error de red desconocido</string>
@@ -28,8 +29,12 @@
     <string name="author">Autor</string>
     <string name="category">Categoría</string>
     <string name="date">Fecha de publicación</string>
+    <string name="publisher">Editorial</string>
     <string name="page_number">Número de páginas</string>
     <string name="isbn">Isbn</string>
     <string name="description">Descripción</string>
     <string name="img_url">Url de imagen</string>
+
+    <string name="book_addition_success">El libro fue agregado con exito</string>
+    <string name="wrong_isbn">ISBN obligatorio y no puede ser de menos de 10 caracteres</string>
 </resources>

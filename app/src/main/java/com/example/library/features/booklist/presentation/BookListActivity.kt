@@ -7,25 +7,18 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.library.R
 import com.example.library.core.common.AppConstants.BookDetail.BUNDLE_KEY_BOOK_ID
 import com.example.library.core.framework.BaseActivity
-import com.example.library.core.utils.GenericUtility
 import com.example.library.databinding.ActivityBookListBinding
 import com.example.library.features.addbook.presentation.AddBookActivity
 import com.example.library.features.bookdetail.presentation.BookDetailActivity
 import com.example.library.features.booklist.BookDownloadStates
 import com.example.library.features.booklist.data.entity.BookEntity
-import io.reactivex.exceptions.CompositeException
-import javax.inject.Inject
 
 class BookListActivity : BaseActivity(),
         BookListAdapter.BookListAdapterListener<String>,
         View.OnClickListener,
         TextWatcher{
-
-    @Inject
-    lateinit var genericUtility: GenericUtility
 
     private lateinit var binding: ActivityBookListBinding
     private lateinit var bookListVM: BookListVM
@@ -62,19 +55,10 @@ class BookListActivity : BaseActivity(),
         bookListVM.downLoadBooks()
     }
 
-    private fun handleError(throwable: Throwable?) {
-        val errorMessage = if (throwable is CompositeException) {
-            val stringBuilder = StringBuilder()
-            for (exception in throwable.exceptions) {
-                stringBuilder.append(exception.message ?: "")
-                    .append("\n")
-            }
-            stringBuilder.toString()
-        } else {
-            throwable?.message ?: getString(R.string.unknown_error)
-        }
 
-        genericUtility.showErrorMessage(errorMessage, this)
+
+    override fun handleError(throwable: Throwable?) {
+        super.handleError(throwable)
         binding.bookListProgressBar.visibility = View.GONE
     }
 
