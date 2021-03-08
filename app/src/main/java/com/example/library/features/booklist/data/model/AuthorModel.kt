@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class AuthorModel (
     @SerializedName("first_name")
-    val authorName: String,
+    var authorName: String,
     @SerializedName("last_name")
-    val authorLastName: String
-)
+    var authorLastName: String
+) {
+    constructor() : this("", "")
+}

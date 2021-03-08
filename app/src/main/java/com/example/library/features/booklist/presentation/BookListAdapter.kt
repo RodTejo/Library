@@ -7,7 +7,6 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library.R
-import com.example.library.core.common.AppConstants
 import com.example.library.core.common.AppConstants.BookDetail.DateFormat.BOOK_DETAIL_DATE_FORMAT
 import com.example.library.core.utils.GenericUtility
 import com.example.library.core.utils.formatTo
@@ -67,10 +66,15 @@ class BookListAdapter(
         private val genericUtility: GenericUtility
     ) : RecyclerView.ViewHolder(binding.root){
         fun bind(book: BookEntity) {
-            Picasso.get().load(book.imageUrl)
-                .placeholder(R.drawable.placeholder_missing_image)
-                .error(R.drawable.placeholder_missing_image)
-                .into(binding.bookImage)
+            if (book.imageUrl!!.isNotEmpty()) {
+                Picasso.get().load(book.imageUrl)
+                    .placeholder(R.drawable.placeholder_missing_image)
+                    .error(R.drawable.placeholder_missing_image)
+                    .into(binding.bookImage)
+            } else {
+                binding.bookImage.setImageResource(R.drawable.placeholder_missing_image)
+            }
+
             val notFoundString: String = context.getString(R.string.not_found)
             binding.bookTitle.text =
                 context.getString(R.string.title_label, book.title ?: notFoundString)
@@ -80,7 +84,7 @@ class BookListAdapter(
             ))
             binding.bookCategory.text =
                 context.getString(R.string.category_label, book.category ?: notFoundString)
-            binding.root.setOnClickListener { listener.onClick(book.id)}
+            binding.root.setOnClickListener { listener.onBookCardClick(book.id)}
         }
     }
 
@@ -129,7 +133,7 @@ class BookListAdapter(
     }
 
     interface BookListAdapterListener<T> {
-        fun onClick(arg: T)
+        fun onBookCardClick(arg: T)
     }
 
     override fun getFilter(): Filter = booksFilter

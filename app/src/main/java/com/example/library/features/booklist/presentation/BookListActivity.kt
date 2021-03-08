@@ -7,23 +7,18 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.library.R
 import com.example.library.core.common.AppConstants.BookDetail.BUNDLE_KEY_BOOK_ID
 import com.example.library.core.framework.BaseActivity
-import com.example.library.core.utils.GenericUtility
 import com.example.library.databinding.ActivityBookListBinding
+import com.example.library.features.addbook.presentation.AddBookActivity
 import com.example.library.features.bookdetail.presentation.BookDetailActivity
 import com.example.library.features.booklist.BookDownloadStates
 import com.example.library.features.booklist.data.entity.BookEntity
-import io.reactivex.exceptions.CompositeException
-import javax.inject.Inject
 
 class BookListActivity : BaseActivity(),
         BookListAdapter.BookListAdapterListener<String>,
+        View.OnClickListener,
         TextWatcher{
-
-    @Inject
-    lateinit var genericUtility: GenericUtility
 
     private lateinit var binding: ActivityBookListBinding
     private lateinit var bookListVM: BookListVM
@@ -45,6 +40,7 @@ class BookListActivity : BaseActivity(),
         binding.bookListRecyclerview.layoutManager = linearLayoutManager
         binding.bookListRecyclerview.adapter = adapter
         binding.searchEditText.addTextChangedListener(this)
+        binding.addBookFab.setOnClickListener(this)
     }
 
     private fun initVM() {
@@ -59,25 +55,14 @@ class BookListActivity : BaseActivity(),
         bookListVM.downLoadBooks()
     }
 
-    private fun handleError(throwable: Throwable?) {
-        val errorMessage = if (throwable is CompositeException) {
-            val stringBuilder = StringBuilder()
-            for (exception in throwable.exceptions) {
-                stringBuilder.append(exception.message ?: "")
-                    .append("\n")
-            }
-            stringBuilder.toString()
-        } else {
-            throwable?.message ?: getString(R.string.unknown_error)
-        }
 
-        genericUtility.showErrorMessage(errorMessage, this)
+
+    override fun handleError(throwable: Throwable?) {
+        super.handleError(throwable)
         binding.bookListProgressBar.visibility = View.GONE
     }
 
-    private fun updateBookList(bookList: List<BookEntity>) {
-        adapter.updateData(bookList)
-    }
+    private fun updateBookList(bookList: List<BookEntity>) = adapter.updateData(bookList)
 
     private fun handleDownloadStates(bookDownloadStates: BookDownloadStates) {
         when(bookDownloadStates) {
@@ -86,9 +71,7 @@ class BookListActivity : BaseActivity(),
         }
     }
 
-    override fun onClick(arg: String) {
-        launchBookDetailActivity(arg)
-    }
+    override fun onBookCardClick(arg: String) = launchBookDetailActivity(arg)
 
     private fun launchBookDetailActivity(bookId: String) {
         val intent = Intent(this, BookDetailActivity::class.java)
@@ -100,7 +83,12 @@ class BookListActivity : BaseActivity(),
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        adapter.filter.filter(s.toString())
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
+            = adapter.filter.filter(s.toString())
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+           binding.addBookFab.id -> startActivity(Intent(this, AddBookActivity::class.java))
+        }
     }
 }

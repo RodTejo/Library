@@ -1,7 +1,6 @@
 package com.example.library.core.di.storage
 
 import android.app.Application
-import androidx.annotation.NonNull
 import androidx.room.Room
 import com.example.library.core.common.AppConstants.DB.DB_NAME
 import com.example.library.core.db.AppDatabase

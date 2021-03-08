@@ -1,5 +1,6 @@
 package com.example.library.core.di.ui
 
+import com.example.library.features.addbook.presentation.AddBookActivity
 import com.example.library.features.bookdetail.presentation.BookDetailActivity
 import com.example.library.features.booklist.presentation.BookListActivity
 import dagger.Module
@@ -12,4 +13,7 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeBookDetailActivity(): BookDetailActivity
+
+    @ContributesAndroidInjector()
+    abstract fun contributeAddBookActivity(): AddBookActivity
 }

@@ -13,6 +13,9 @@ interface BookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBooks(books: List<BookEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBook(book: BookEntity)
+
     @Query("SELECT * FROM BookEntity")
     fun getBooks(): Flowable<List<BookEntity>>
 

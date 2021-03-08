@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Library">
+        <activity android:name=".features.addbook.presentation.AddBookActivity" />
         <activity android:name=".features.bookdetail.presentation.BookDetailActivity" />
         <activity android:name=".features.booklist.presentation.BookListActivity">
             <intent-filter>
@@ -21,4 +22,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
