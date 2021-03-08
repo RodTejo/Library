@@ -10,6 +10,7 @@ object AppConstants {
         object BookList {
             const val API_BASE: String = "https://jsonbox.io/";
             const val BOOKS_ENDPOINT: String = "box_479f5c073a80294b4c3b";
+            const val DELETE_BOOK_ENDPOINT: String = "box_479f5c073a80294b4c3b/{RECORD_ID}";
         }
     }
 

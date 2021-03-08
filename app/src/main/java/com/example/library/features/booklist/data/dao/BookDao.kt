@@ -21,4 +21,7 @@ interface BookDao {
 
     @Query("SELECT * FROM BookEntity WHERE id = :id")
     fun getBookDetail(id: String): Single<BookEntity>
+
+    @Query("DELETE FROM BookEntity WHERE id = :id")
+    fun deleteBook(id: String)
 }

@@ -85,6 +85,10 @@ class BookListAdapter(
             binding.bookCategory.text =
                 context.getString(R.string.category_label, book.category ?: notFoundString)
             binding.root.setOnClickListener { listener.onBookCardClick(book.id)}
+            binding.root.setOnLongClickListener {
+                listener.onBookCardLongClick(book.id)
+                true
+            }
         }
     }
 
@@ -134,6 +138,7 @@ class BookListAdapter(
 
     interface BookListAdapterListener<T> {
         fun onBookCardClick(arg: T)
+        fun onBookCardLongClick(arg: T)
     }
 
     override fun getFilter(): Filter = booksFilter

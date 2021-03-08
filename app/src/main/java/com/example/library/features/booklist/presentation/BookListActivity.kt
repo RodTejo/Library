@@ -14,11 +14,13 @@ import com.example.library.features.addbook.presentation.AddBookActivity
 import com.example.library.features.bookdetail.presentation.BookDetailActivity
 import com.example.library.features.booklist.BookDownloadStates
 import com.example.library.features.booklist.data.entity.BookEntity
+import com.example.library.features.deletebook.presentation.DeleteBookDialogFragment
 
 class BookListActivity : BaseActivity(),
         BookListAdapter.BookListAdapterListener<String>,
         View.OnClickListener,
-        TextWatcher{
+        TextWatcher,
+        DeleteBookDialogFragment.DeleteBookDialogListener{
 
     private lateinit var binding: ActivityBookListBinding
     private lateinit var bookListVM: BookListVM
@@ -73,6 +75,12 @@ class BookListActivity : BaseActivity(),
 
     override fun onBookCardClick(arg: String) = launchBookDetailActivity(arg)
 
+    override fun onBookCardLongClick(arg: String) {
+        bookListVM.bookId = arg
+        val deleteBookDialogFragment = DeleteBookDialogFragment()
+        deleteBookDialogFragment.show(supportFragmentManager, "deleteBook")
+    }
+
     private fun launchBookDetailActivity(bookId: String) {
         val intent = Intent(this, BookDetailActivity::class.java)
         intent.putExtra(BUNDLE_KEY_BOOK_ID, bookId)
@@ -90,5 +98,9 @@ class BookListActivity : BaseActivity(),
         when(v?.id) {
            binding.addBookFab.id -> startActivity(Intent(this, AddBookActivity::class.java))
         }
+    }
+
+    override fun onAcceptBookDeletion() {
+        bookListVM.deleteBook()
     }
 }
